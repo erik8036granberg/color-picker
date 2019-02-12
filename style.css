@@ -1,0 +1,48 @@
+/* basic styles */
+
+* {
+    box-sizing: border-box;
+}
+
+img {
+    width: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.wrapper {
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.wrapper>div {
+    width: 100%;
+    padding-top: 100%;
+    border: solid 2px #000;
+}
+
+#box_1 {
+    background-color: rgb(171, 236, 65);
+}
+
+.panel {
+    padding: 0 2rem;
+}
+
+/* .wrapper input[type="color"i] {
+    width: 100% !important;
+    height: 500px !important;
+    background-color: buttonface;
+    cursor: default;
+    border-width: 0;
+    border-style: solid;
+    border-color: transparent;
+    border-image: initial;
+    padding: 0 !important;
+    margin: 0 !important;
+} */
