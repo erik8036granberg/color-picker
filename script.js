@@ -92,6 +92,7 @@ function setBaseColor(hsl) {
   let h = parseInt(hsl.h).toFixed(2);
   let s = parseInt(hsl.s).toFixed(2);
   let l = parseInt(hsl.l).toFixed(2);
+
   setBox_1(h, s, l);
   setBox_2(h, s, l);
   setBox_3(h, s, l);
