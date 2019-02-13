@@ -2,15 +2,24 @@
 
 let colorWell;
 const defaultColor = "#0000ff";
+let hexColor = defaultColor;
 
-// let colorHarmony = "monochromatic";
-// let convertRgbColor;
-
+// colorboxes
 const box_1 = document.querySelector("#box_1");
 const box_2 = document.querySelector("#box_2");
 const box_3 = document.querySelector("#box_3");
 const box_4 = document.querySelector("#box_4");
 const box_5 = document.querySelector("#box_5");
+
+// labels
+const box_1_label = document.querySelector("#box_1_label");
+const box_2_label = document.querySelector("#box_2_label");
+const box_3_label = document.querySelector("#box_3_label");
+const box_4_label = document.querySelector("#box_4_label");
+const box_5_label = document.querySelector("#box_5_label");
+
+// set startlabel
+box_1_label.textContent = `hsl(240, 100%, 50%)`;
 
 document.addEventListener("DOMContentLoaded", init, false);
 
@@ -24,11 +33,11 @@ function init() {
 
 //  - - - - - - - - - - - - - - - colorPick - - - - - - - - - - - - - - -
 
-function colorPick(event) {
+function colorPick(event, defaultColor) {
   console.log("colorPick run");
 
   // Get hex color from picker
-  const hexColor = event.target.value;
+  hexColor = event.target.value;
   console.log("hexcolor is: " + hexColor);
 
   // hex to rgb
@@ -42,28 +51,12 @@ function colorPick(event) {
   let r = parseInt(RgbValuesSplit[0]);
   let g = parseInt(RgbValuesSplit[1]);
   let b = parseInt(RgbValuesSplit[2]);
-  console.log(r);
-  console.log(g);
-  console.log(b);
 
   console.log("rgbValues is: " + rgbValues);
 
-  // //   rgb values to string
-  // const rgbColor = rgbValuesToString(r, g, b);
-
   //   rgb to hls
   const hslValues = rgbToHsl(r, g, b);
-  console.log("hslValues is: " + hslValues);
-
-
-  //   single HLS values
   console.log(hslValues);
-  let h = hslValues.h;
-  console.log("h is: " + h);
-  let s = hslValues.s;
-  console.log("s is: " + s);
-  let l = hslValues.l;
-  console.log("l is: " + l);
 
   // setBaseColor();
   setBaseColor(hslValues);
@@ -75,8 +68,23 @@ function setBaseColor(hsl) {
   console.log("setBaseColor run");
   console.log(hsl);
 
-  // set box_1 background color
-  box_1.style.backgroundColor = `hsl(${hsl.h},${hsl.s}%,${hsl.l}%)`;
+  //   single HLS values
+  console.log(hsl);
+  let h = hsl.h;
+  let s = hsl.s;
+  let l = hsl.l;
+
+  // round to 2 decimals
+  h = h.toFixed(0);
+  s = s.toFixed(0);
+  l = l.toFixed(0);
+
+  let hls_line = `hsl(${h}, ${s}%, ${l}%)`;
+
+  // set box_1 background color & label
+  box_1.style.backgroundColor = hls_line;
+  box_1_label.textContent = hls_line;
+
   calculateColors(hsl);
 }
 
@@ -158,3 +166,7 @@ function rgbToHsl(r, g, b) {
     l
   };
 }
+
+// function roundToTwo(num) {
+//   return +(Math.round(num + "e+2") + "e-2");
+// }
