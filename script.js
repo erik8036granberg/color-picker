@@ -20,8 +20,16 @@ const box_4_label = document.querySelector("#box_4_label");
 const box_5_label = document.querySelector("#box_5_label");
 
 box_1_label.textContent = `hsl(240, 100%, 50%)`;
+let startColor = {
+  h: 240,
+  s: 100,
+  l: 50
+};
+setBaseColor(startColor);
+
 
 document.addEventListener("DOMContentLoaded", init, false);
+
 
 function init() {
   console.log("init run");
@@ -32,6 +40,7 @@ function init() {
   document
     .querySelector("#selectColorSet")
     .addEventListener("change", corlorSetPicked);
+
 }
 
 function corlorSetPicked() {
@@ -78,42 +87,52 @@ function setBaseColor(hsl) {
   console.log("setBaseColor run");
   console.log(hsl);
 
-  //   single HLS values
+  //   single HLS values + round to 2 decimals
   console.log(hsl);
-  let h = parseInt(hsl.h);
-  let s = parseInt(hsl.s);
-  let l = parseInt(hsl.l);
+  let h = parseInt(hsl.h).toFixed(2);
+  let s = parseInt(hsl.s).toFixed(2);
+  let l = parseInt(hsl.l).toFixed(2);
+  setBox_1(h, s, l);
+  setBox_2(h, s, l);
+  setBox_3(h, s, l);
+  setBox_4(h, s, l);
+  setBox_5(h, s, l);
+}
 
-  // round to 2 decimals
-  h = h.toFixed(2);
-  s = s.toFixed(2);
-  l = l.toFixed(2);
-
+function setBox_1(h, s, l) {
   // set box_1 background color & label
   let hsl_line_1 = `hsl(${h}, ${s}%, ${l}%)`;
   box_1.style.backgroundColor = hsl_line_1;
   box_1_label.textContent = hsl_line_1;
+}
 
+function setBox_2(h, s, l) {
   // set box_2 background color & label
-  let hsl_line_2 = `hsl(${h}, ${s}%, ${l + 10}%)`;
+  let hsl_line_2 = `hsl(${h}, ${s}%, ${(parseInt(l)+10)}%)`;
   box_2.style.backgroundColor = hsl_line_2;
   box_2_label.textContent = hsl_line_2;
+}
 
+function setBox_3(h, s, l) {
   // set box_3 background color & label
-  let hsl_line_3 = `hsl(${h}, ${s}%, ${l - 10}%)`;
+  console.log(l);
+  let hsl_line_3 = `hsl(${h}, ${s}%, ${(parseInt(l)-10)}%`;
   box_3.style.backgroundColor = hsl_line_3;
   box_3_label.textContent = hsl_line_3;
+}
 
+function setBox_4(h, s, l) {
   // set box_4 background color & label
-  let hsl_line_4 = `hsl(${h}, ${s}%, ${l + 20}%)`;
+  let hsl_line_4 = `hsl(${h}, ${s}%, ${(parseInt(l)+20)}%`;
   box_4.style.backgroundColor = hsl_line_4;
   box_4_label.textContent = hsl_line_4;
+}
 
+function setBox_5(h, s, l) {
   // set box_5 background color & label
-  let hsl_line_5 = `hsl(${h}, ${s}%, ${l - 20}%)`;
+  let hsl_line_5 = `hsl(${h}, ${s}%, ${(parseInt(l)-20)}%)`;
   box_5.style.backgroundColor = hsl_line_5;
   box_5_label.textContent = hsl_line_5;
-
   colorSet(h, s, l);
 }
 
