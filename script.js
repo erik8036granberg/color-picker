@@ -40,6 +40,9 @@ function colorPick(event) {
   let r = parseInt(RgbValuesSplit[0]);
   let g = parseInt(RgbValuesSplit[1]);
   let b = parseInt(RgbValuesSplit[2]);
+  console.log(r);
+  console.log(g);
+  console.log(b);
 
   console.log("rgbValues is: " + rgbValues);
 
@@ -49,6 +52,13 @@ function colorPick(event) {
   //   rgb to hls
   const hslValues = rgbToHsl(r, g, b);
   console.log("hslValues is: " + hslValues);
+  console.log(hslValues);
+  let h = hslValues.h;
+  console.log("h is: " + h);
+  let s = hslValues.s;
+  console.log("s is: " + s);
+  let l = hslValues.l;
+  console.log("l is: " + l);
 
   // setBaseColor();
   setColor(rgbColor);
