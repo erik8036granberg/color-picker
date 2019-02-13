@@ -37,6 +37,8 @@ function colorPick(event) {
   // split return rgb values to seperate values
   let RgbValuesSplit = rgbValues.split(",");
   console.log(RgbValuesSplit);
+
+  //   single HLS values
   let r = parseInt(RgbValuesSplit[0]);
   let g = parseInt(RgbValuesSplit[1]);
   let b = parseInt(RgbValuesSplit[2]);
@@ -46,12 +48,15 @@ function colorPick(event) {
 
   console.log("rgbValues is: " + rgbValues);
 
-  //   rgb values to string
-  const rgbColor = rgbValuesToString(r, g, b);
+  // //   rgb values to string
+  // const rgbColor = rgbValuesToString(r, g, b);
 
   //   rgb to hls
   const hslValues = rgbToHsl(r, g, b);
   console.log("hslValues is: " + hslValues);
+
+
+  //   single HLS values
   console.log(hslValues);
   let h = hslValues.h;
   console.log("h is: " + h);
@@ -61,20 +66,23 @@ function colorPick(event) {
   console.log("l is: " + l);
 
   // setBaseColor();
-  setColor(rgbColor);
+  setBaseColor(hslValues);
 }
 
 //  - - - - - - - - - - - - - - - setBaseColor - - - - - - - - - - - - - - -
 
-function setBaseColor() {
+function setBaseColor(hsl) {
   console.log("setBaseColor run");
+  console.log(hsl);
 
-  calculateColors();
+  // set box_1 background color
+  box_1.style.backgroundColor = `hsl(${hsl.h},${hsl.s}%,${hsl.l}%)`;
+  calculateColors(hsl);
 }
 
 //  - - - - - - - - - - - - - - - calculateColors - - - - - - - - - - - - - - -
 
-function calculateColors() {
+function calculateColors(hsl) {
   console.log("calculateColors run");
 
   setColor();
@@ -85,8 +93,6 @@ function calculateColors() {
 function setColor(color) {
   console.log("setColor run");
 
-  // set box_1 background color
-  box_1.style.backgroundColor = color;
 }
 
 //  - - - - - - - - - - - - - - - hexToRgb - - - - - - - - - - - - - - -
@@ -106,13 +112,13 @@ function hexToRgb(color) {
 
 //  - - - - - - - - - - - - - - - rgbValuesToString - - - - - - - - - - - - - - -
 
-// rgb values to string
-function rgbValuesToString(r, g, b) {
-  console.log("rgbValuesToString run");
-  let rgbString = `rgb(${r},${g},${b})`;
-  console.log("rgbString is: " + rgbString);
-  //   setColor(rgbString);
-}
+// // rgb values to string
+// function rgbValuesToString(r, g, b) {
+//   console.log("rgbValuesToString run");
+//   let rgbString = `rgb(${r},${g},${b})`;
+//   console.log("rgbString is: " + rgbString);
+//   //   setColor(rgbString);
+// }
 
 //  - - - - - - - - - - - - - - - rgbToHsl - - - - - - - - - - - - - - -
 
