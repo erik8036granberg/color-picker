@@ -20,10 +20,15 @@ body {
   grid-template-columns: repeat(5, 1fr);
 }
 
-.wrapper > div {
-  width: 100%;
+.wrapper .colorbox {
   padding-top: 100%;
   border: solid 2px #000;
+}
+
+.wrapper .label {
+  height: 30px;
+  text-align: center;
+  margin: 10px 0;
 }
 
 #box_1 {
