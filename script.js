@@ -59,6 +59,7 @@ function colorPick(event) {
 
   // setColor();
   colorSet(hslColor);
+
 }
 
 //  - - - - - - - - - - - - - - - get colorSet values from select - - - - - - - - - - - - - - -
@@ -66,9 +67,12 @@ function colorPick(event) {
 function colorSetPicked() {
   console.log("corlorSetPicked");
 
+  const rgbColor = hexToRgb(hexColor);
+  const hslColor = rgbToHsl(rgbColor);
+
   selectedColorSet = this.options[this.selectedIndex].value;
   console.log(selectedColorSet);
-  colorSet(selectedColorSet);
+  colorSet(hslColor);
 }
 
 //  - - - - - - - - - - - - - - - colorSet - - - - - - - - - - - - - - -
@@ -76,10 +80,24 @@ function colorSetPicked() {
 function colorSet(hslColor) {
   console.log("setColor run");
 
-
-
-
-  Monochromatic(hslColor);
+  if (selectedColorSet === "Monochromatic") {
+    Monochromatic(hslColor);
+  }
+  if (selectedColorSet === "Analogous") {
+    Analogous(hslColor);
+  }
+  if (selectedColorSet === "Triad") {
+    Triad(hslColor);
+  }
+  if (selectedColorSet === "Complementary") {
+    Complementary(hslColor);
+  }
+  if (selectedColorSet === "Compound") {
+    Compound(hslColor);
+  }
+  if (selectedColorSet === "Shades") {
+    Shades(hslColor);
+  }
 
 }
 
@@ -88,17 +106,111 @@ function colorSet(hslColor) {
 function Monochromatic(hslColor) {
   console.log("Monochromatic run");
 
-  //   single HLS values + round to 2 decimals
   console.log(hslColor);
   let h = hslColor.h.toFixed(0);
   let s = hslColor.s.toFixed(0);
   let l = hslColor.l.toFixed(0);
 
-  let color_1 = `HSL(${h},${s}%,${l}%)`;
-  let color_2 = `HSL(${h},${s}%,${parseInt(l) + 10}%)`;
-  let color_3 = `HSL(${h},${s}%,${parseInt(l) - 10}%)`;
-  let color_4 = `HSL(${h},${s}%,${parseInt(l) + 20}%)`;
-  let color_5 = `HSL(${h},${s}%,${parseInt(l) - 20}%)`;
+  let color_1 = `HSL(${parseInt(h)},${parseInt(s)}%,${parseInt(l)}%)`;
+  let color_2 = `HSL(${parseInt(h)},${parseInt(s)}%,${parseInt(l) + 10}%)`;
+  let color_3 = `HSL(${parseInt(h)},${parseInt(s)}%,${parseInt(l) - 10}%)`;
+  let color_4 = `HSL(${parseInt(h)},${parseInt(s)}%,${parseInt(l) + 20}%)`;
+  let color_5 = `HSL(${parseInt(h)},${parseInt(s)}%,${parseInt(l) - 20}%)`;
+
+  setBaseColor(color_1, color_2, color_3, color_4, color_5);
+}
+
+//  - - - - - - - - - - - - - - - Analogous - - - - - - - - - - - - - - -
+
+function Analogous(hslColor) {
+  console.log("Analogous run");
+
+  console.log(hslColor);
+  let h = hslColor.h.toFixed(0);
+  let s = hslColor.s.toFixed(0);
+  let l = hslColor.l.toFixed(0);
+
+  let color_1 = `HSL(${parseInt(h)},${parseInt(s)}%,${parseInt(l)}%)`;
+  let color_2 = `HSL(${parseInt(h) + 15},${parseInt(s)}%,${parseInt(l)}%)`;
+  let color_3 = `HSL(${parseInt(h) - 15},${parseInt(s)}%,${parseInt(l)}%)`;
+  let color_4 = `HSL(${parseInt(h) + 30},${parseInt(s)}%,${parseInt(l)}%)`;
+  let color_5 = `HSL(${parseInt(h) - 30},${parseInt(s)}%,${parseInt(l)}%)`;
+
+  setBaseColor(color_1, color_2, color_3, color_4, color_5);
+}
+
+//  - - - - - - - - - - - - - - - Triad - - - - - - - - - - - - - - -
+
+function Triad(hslColor) {
+  console.log("Triad run");
+
+  console.log(hslColor);
+  let h = hslColor.h.toFixed(0);
+  let s = hslColor.s.toFixed(0);
+  let l = hslColor.l.toFixed(0);
+
+  let color_1 = `HSL(${parseInt(h)},${parseInt(s)}%,${parseInt(l)}%)`;
+  let color_2 = `HSL(${parseInt(h)},${parseInt(s)}%,${parseInt(l)}%)`;
+  let color_3 = `HSL(${parseInt(h)},${parseInt(s)}%,${parseInt(l)}%)`;
+  let color_4 = `HSL(${parseInt(h)},${parseInt(s)}%,${parseInt(l)}%)`;
+  let color_5 = `HSL(${parseInt(h)},${parseInt(s)}%,${parseInt(l)}%)`;
+
+  setBaseColor(color_1, color_2, color_3, color_4, color_5);
+}
+
+//  - - - - - - - - - - - - - - - Complementary - - - - - - - - - - - - - - -
+
+function Complementary(hslColor) {
+  console.log("Complementary run");
+
+  console.log(hslColor);
+  let h = hslColor.h.toFixed(0);
+  let s = hslColor.s.toFixed(0);
+  let l = hslColor.l.toFixed(0);
+
+  let color_1 = `HSL(${parseInt(h)},${parseInt(s)}%,${parseInt(l)}%)`;
+  let color_2 = `HSL(${parseInt(h)},${parseInt(s)}%,${parseInt(l)}%)`;
+  let color_3 = `HSL(${parseInt(h)},${parseInt(s)}%,${parseInt(l)}%)`;
+  let color_4 = `HSL(${parseInt(h)},${parseInt(s)}%,${parseInt(l)}%)`;
+  let color_5 = `HSL(${parseInt(h)},${parseInt(s)}%,${parseInt(l)}%)`;
+
+  setBaseColor(color_1, color_2, color_3, color_4, color_5);
+}
+
+//  - - - - - - - - - - - - - - - Compound - - - - - - - - - - - - - - -
+
+function Compound(hslColor) {
+  console.log("Compound run");
+
+  console.log(hslColor);
+  let h = hslColor.h.toFixed(0);
+  let s = hslColor.s.toFixed(0);
+  let l = hslColor.l.toFixed(0);
+
+  let color_1 = `HSL(${parseInt(h)},${parseInt(s)}%,${parseInt(l)}%)`;
+  let color_2 = `HSL(${parseInt(h)},${parseInt(s)}%,${parseInt(l)}%)`;
+  let color_3 = `HSL(${parseInt(h)},${parseInt(s)}%,${parseInt(l)}%)`;
+  let color_4 = `HSL(${parseInt(h)},${parseInt(s)}%,${parseInt(l)}%)`;
+  let color_5 = `HSL(${parseInt(h)},${parseInt(s)}%,${parseInt(l)}%)`;
+
+  setBaseColor(color_1, color_2, color_3, color_4, color_5);
+}
+
+//  - - - - - - - - - - - - - - - Shades - - - - - - - - - - - - - - -
+
+function Shades(hslColor) {
+  console.log("Shades run");
+
+  console.log(hslColor);
+  let h = hslColor.h.toFixed(0);
+  let s = hslColor.s.toFixed(0);
+  let l = hslColor.l.toFixed(0);
+
+  let color_1 = `HSL(${parseInt(h)},${parseInt(s)}%,${parseInt(l)}%)`;
+  let color_2 = `HSL(${parseInt(h)},${parseInt(s)}%,${parseInt(l)}%)`;
+  let color_3 = `HSL(${parseInt(h)},${parseInt(s)}%,${parseInt(l)}%)`;
+  let color_4 = `HSL(${parseInt(h)},${parseInt(s)}%,${parseInt(l)}%)`;
+  let color_5 = `HSL(${parseInt(h)},${parseInt(s)}%,${parseInt(l)}%)`;
 
   setBaseColor(color_1, color_2, color_3, color_4, color_5);
 }
@@ -218,3 +330,12 @@ function rgbToHsl(rgbColor) {
     l
   };
 }
+
+// function hslRemoveDecimals() {
+// //   single HLS values + round to 2 decimals
+// console.log(hslColor);
+// let h = hslColor.h.toFixed(0);
+// let s = hslColor.s.toFixed(0);
+// let l = hslColor.l.toFixed(0);
+// return
+// }
