@@ -26,10 +26,9 @@ let startColor = {
   l: 50
 };
 setBaseColor(startColor);
-
+colorSet(startColor);
 
 document.addEventListener("DOMContentLoaded", init, false);
-
 
 function init() {
   console.log("init run");
@@ -40,14 +39,6 @@ function init() {
   document
     .querySelector("#selectColorSet")
     .addEventListener("change", corlorSetPicked);
-
-}
-
-function corlorSetPicked() {
-  console.log("corlorSetPicked");
-  selectedCorlorSet = this.options[this.selectedIndex].value;
-  console.log(selectedCorlorSet);
-  colorSet();
 }
 
 //  - - - - - - - - - - - - - - - colorPick - - - - - - - - - - - - - - -
@@ -60,38 +51,27 @@ function colorPick(event) {
   console.log("hexColor is: " + hexColor);
 
   // hex to rgb
-  const rgbValues = hexToRgb(hexColor);
+  const rgbColor = hexToRgb(hexColor);
 
-  // split return rgb values to seperate values
-  let RgbValuesSplit = rgbValues.split(",");
-  console.log(RgbValuesSplit);
-
-  //   single HLS values
-  let r = parseInt(RgbValuesSplit[0]);
-  let g = parseInt(RgbValuesSplit[1]);
-  let b = parseInt(RgbValuesSplit[2]);
-
-  console.log("rgbValues is: " + rgbValues);
-
-  //   rgb to hls
-  const hslValues = rgbToHsl(r, g, b);
-  console.log(hslValues);
+  //   rgb to hsl
+  const hslColor = rgbToHsl(rgbColor);
+  console.log(hslColor);
 
   // setBaseColor();
-  setBaseColor(hslValues);
+  setBaseColor(hslColor);
 }
 
 //  - - - - - - - - - - - - - - - setBaseColor - - - - - - - - - - - - - - -
 
-function setBaseColor(hsl) {
+function setBaseColor(hslColor) {
   console.log("setBaseColor run");
-  console.log(hsl);
+  console.log(hslColor);
 
   //   single HLS values + round to 2 decimals
-  console.log(hsl);
-  let h = parseInt(hsl.h).toFixed(2);
-  let s = parseInt(hsl.s).toFixed(2);
-  let l = parseInt(hsl.l).toFixed(2);
+  console.log(hslColor);
+  let h = hslColor.h.toFixed(2);
+  let s = hslColor.s.toFixed(2);
+  let l = hslColor.l.toFixed(2);
 
   setBox_1(h, s, l);
   setBox_2(h, s, l);
@@ -109,7 +89,7 @@ function setBox_1(h, s, l) {
 
 function setBox_2(h, s, l) {
   // set box_2 background color & label
-  let hsl_line_2 = `hsl(${h}, ${s}%, ${(parseInt(l)+10)}%)`;
+  let hsl_line_2 = `hsl(${h}, ${s}%, ${parseInt(l) + 10}%)`;
   box_2.style.backgroundColor = hsl_line_2;
   box_2_label.textContent = hsl_line_2;
 }
@@ -117,60 +97,75 @@ function setBox_2(h, s, l) {
 function setBox_3(h, s, l) {
   // set box_3 background color & label
   console.log(l);
-  let hsl_line_3 = `hsl(${h}, ${s}%, ${(parseInt(l)-10)}%`;
+  let hsl_line_3 = `hsl(${h}, ${s}%, ${parseInt(l) - 10}%`;
   box_3.style.backgroundColor = hsl_line_3;
   box_3_label.textContent = hsl_line_3;
 }
 
 function setBox_4(h, s, l) {
   // set box_4 background color & label
-  let hsl_line_4 = `hsl(${h}, ${s}%, ${(parseInt(l)+20)}%`;
+  let hsl_line_4 = `hsl(${h}, ${s}%, ${parseInt(l) + 20}%`;
   box_4.style.backgroundColor = hsl_line_4;
   box_4_label.textContent = hsl_line_4;
 }
 
 function setBox_5(h, s, l) {
   // set box_5 background color & label
-  let hsl_line_5 = `hsl(${h}, ${s}%, ${(parseInt(l)-20)}%)`;
+  let hsl_line_5 = `hsl(${h}, ${s}%, ${parseInt(l) - 20}%)`;
   box_5.style.backgroundColor = hsl_line_5;
   box_5_label.textContent = hsl_line_5;
   colorSet(h, s, l);
 }
 
+//  - - - - - - - - - - - - - - - get colorSet values - - - - - - - - - - - - - - -
+
+function corlorSetPicked() {
+  console.log("corlorSetPicked");
+
+  selectedCorlorSet = this.options[this.selectedIndex].value;
+  console.log(selectedCorlorSet);
+  colorSet(selectedCorlorSet);
+}
+
 //  - - - - - - - - - - - - - - - colorSet - - - - - - - - - - - - - - -
 
-function colorSet(h, s, l) {
+function colorSet(hexColor) {
   console.log("setColor run");
 }
 
-//  - - - - - - - - - - - - - - - calculateColors - - - - - - - - - - - - - - -
-
-function calculateColors() {
-  console.log("calculateColors run");
-
-  setColor();
-}
 
 //  - - - - - - - - - - - - - - - hexToRgb - - - - - - - - - - - - - - -
 
-function hexToRgb(color) {
-  console.log("hexToRgb run");
-  console.log(color);
-  color = color.replace(/[^0-9A-F]/gi, "");
-  let bigint = parseInt(color, 16);
-  let r = (bigint >> 16) & 255;
-  let g = (bigint >> 8) & 255;
-  let b = bigint & 255;
+function hexToRgb(hexColor) {
+  console.log("hexColor to rgb");
 
-  console.log([r, g, b].join());
+  let subString1 = hexColor.substring(1, 3);
+  let subString2 = hexColor.substring(3, 5);
+  let subString3 = hexColor.substring(5, 7);
 
-  return [r, g, b].join();
+  console.log(subString1, subString2, subString3);
+
+  let r = parseInt(subString1, 16);
+  let g = parseInt(subString2, 16);
+  let b = parseInt(subString3, 16);
+  console.log(r, g, b);
+
+  return {
+    r,
+    g,
+    b
+  };
 }
 
 //  - - - - - - - - - - - - - - - rgbToHsl - - - - - - - - - - - - - - -
 
-function rgbToHsl(r, g, b) {
+function rgbToHsl(rgbColor) {
   console.log("rgbToHsl run");
+
+  let r = rgbColor.r;
+  let g = rgbColor.g;
+  let b = rgbColor.b;
+
   r /= 255;
   g /= 255;
   b /= 255;
@@ -199,6 +194,7 @@ function rgbToHsl(r, g, b) {
   s *= 100;
   l *= 100;
   console.log("hsl(%f,%f%,%f%)", h, s, l); // just for testing
+
   return {
     h,
     s,
