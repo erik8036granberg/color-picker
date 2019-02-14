@@ -12,6 +12,7 @@ body {
   margin: 0;
   padding: 0;
   position: relative;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .wrapper {
@@ -26,6 +27,7 @@ body {
 }
 
 .wrapper .label {
+  font-size: 11px;
   height: 30px;
   text-align: center;
   margin: 10px 0;

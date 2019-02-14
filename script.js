@@ -3,7 +3,7 @@
 let colorWell;
 const defaultColor = "#0000ff";
 let hexColor = defaultColor;
-let selectedCorlorSet = "Monochromatic";
+let selectedColorSet = "Monochromatic";
 
 // colorboxes
 const box_1 = document.querySelector("#box_1");
@@ -38,7 +38,7 @@ function init() {
   colorWell.select();
   document
     .querySelector("#selectColorSet")
-    .addEventListener("change", corlorSetPicked);
+    .addEventListener("change", colorSetPicked);
 }
 
 //  - - - - - - - - - - - - - - - colorPick - - - - - - - - - - - - - - -
@@ -57,82 +57,99 @@ function colorPick(event) {
   const hslColor = rgbToHsl(rgbColor);
   console.log(hslColor);
 
-  // setBaseColor();
-  setBaseColor(hslColor);
+  // setColor();
+  colorSet(hslColor);
 }
 
-//  - - - - - - - - - - - - - - - setBaseColor - - - - - - - - - - - - - - -
+//  - - - - - - - - - - - - - - - get colorSet values from select - - - - - - - - - - - - - - -
 
-function setBaseColor(hslColor) {
-  console.log("setBaseColor run");
-  console.log(hslColor);
-
-  //   single HLS values + round to 2 decimals
-  console.log(hslColor);
-  let h = hslColor.h.toFixed(2);
-  let s = hslColor.s.toFixed(2);
-  let l = hslColor.l.toFixed(2);
-
-  setBox_1(h, s, l);
-  setBox_2(h, s, l);
-  setBox_3(h, s, l);
-  setBox_4(h, s, l);
-  setBox_5(h, s, l);
-}
-
-function setBox_1(h, s, l) {
-  // set box_1 background color & label
-  let hsl_line_1 = `hsl(${h}, ${s}%, ${l}%)`;
-  box_1.style.backgroundColor = hsl_line_1;
-  box_1_label.textContent = hsl_line_1;
-}
-
-function setBox_2(h, s, l) {
-  // set box_2 background color & label
-  let hsl_line_2 = `hsl(${h}, ${s}%, ${parseInt(l) + 10}%)`;
-  box_2.style.backgroundColor = hsl_line_2;
-  box_2_label.textContent = hsl_line_2;
-}
-
-function setBox_3(h, s, l) {
-  // set box_3 background color & label
-  console.log(l);
-  let hsl_line_3 = `hsl(${h}, ${s}%, ${parseInt(l) - 10}%`;
-  box_3.style.backgroundColor = hsl_line_3;
-  box_3_label.textContent = hsl_line_3;
-}
-
-function setBox_4(h, s, l) {
-  // set box_4 background color & label
-  let hsl_line_4 = `hsl(${h}, ${s}%, ${parseInt(l) + 20}%`;
-  box_4.style.backgroundColor = hsl_line_4;
-  box_4_label.textContent = hsl_line_4;
-}
-
-function setBox_5(h, s, l) {
-  // set box_5 background color & label
-  let hsl_line_5 = `hsl(${h}, ${s}%, ${parseInt(l) - 20}%)`;
-  box_5.style.backgroundColor = hsl_line_5;
-  box_5_label.textContent = hsl_line_5;
-  colorSet(h, s, l);
-}
-
-//  - - - - - - - - - - - - - - - get colorSet values - - - - - - - - - - - - - - -
-
-function corlorSetPicked() {
+function colorSetPicked() {
   console.log("corlorSetPicked");
 
-  selectedCorlorSet = this.options[this.selectedIndex].value;
-  console.log(selectedCorlorSet);
-  colorSet(selectedCorlorSet);
+  selectedColorSet = this.options[this.selectedIndex].value;
+  console.log(selectedColorSet);
+  colorSet(selectedColorSet);
 }
 
 //  - - - - - - - - - - - - - - - colorSet - - - - - - - - - - - - - - -
 
-function colorSet(hexColor) {
+function colorSet(hslColor) {
   console.log("setColor run");
+
+
+
+
+  Monochromatic(hslColor);
+
 }
 
+//  - - - - - - - - - - - - - - - Monochromatic - - - - - - - - - - - - - - -
+
+function Monochromatic(hslColor) {
+  console.log("Monochromatic run");
+
+  //   single HLS values + round to 2 decimals
+  console.log(hslColor);
+  let h = hslColor.h.toFixed(0);
+  let s = hslColor.s.toFixed(0);
+  let l = hslColor.l.toFixed(0);
+
+  let color_1 = `HSL(${h},${s}%,${l}%)`;
+  let color_2 = `HSL(${h},${s}%,${parseInt(l) + 10}%)`;
+  let color_3 = `HSL(${h},${s}%,${parseInt(l) - 10}%)`;
+  let color_4 = `HSL(${h},${s}%,${parseInt(l) + 20}%)`;
+  let color_5 = `HSL(${h},${s}%,${parseInt(l) - 20}%)`;
+
+  setBaseColor(color_1, color_2, color_3, color_4, color_5);
+}
+
+//  - - - - - - - - - - - - - - - setBaseColor - - - - - - - - - - - - - - -
+
+function setBaseColor(color_1, color_2, color_3, color_4, color_5) {
+  console.log("setBaseColor run");
+
+  // distribute colors to fields
+  setBox_1(color_1);
+  setBox_2(color_2);
+  setBox_3(color_3);
+  setBox_4(color_4);
+  setBox_5(color_5);
+}
+
+// set box_1 background color & label
+function setBox_1(color_1) {
+  let color = color_1;
+  box_1.style.backgroundColor = color;
+  box_1_label.textContent = color;
+}
+
+// set box_2 background color & label
+function setBox_2(color_2) {
+  let color = color_2;
+  box_2.style.backgroundColor = color;
+  box_2_label.textContent = color;
+}
+
+// set box_3 background color & label
+function setBox_3(color_3) {
+  let color = color_3;
+  box_3.style.backgroundColor = color;
+  box_3_label.textContent = color;
+}
+
+// set box_4 background color & label
+function setBox_4(color_4) {
+  let color = color_4;
+  box_4.style.backgroundColor = color;
+  box_4_label.textContent = color;
+}
+
+// set box_5 background color & label
+function setBox_5(color_5) {
+  let color = color_5;
+  box_5.style.backgroundColor = color;
+  box_5_label.textContent = color;
+}
 
 //  - - - - - - - - - - - - - - - hexToRgb - - - - - - - - - - - - - - -
 
